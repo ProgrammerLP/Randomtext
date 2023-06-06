@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Randomtext
 {
@@ -19,7 +16,7 @@ namespace Randomtext
             string file = "C://Users/Luke/RT.txt";
             if (!File.Exists(file))
             {
-                File.Create(file);
+                File.Create(file).Dispose();
             }
             else
             {
@@ -28,8 +25,10 @@ namespace Randomtext
 
             StreamWriter sw = new StreamWriter(file);
             Random r = new Random();
-            int rows = 3000000;
-            int columns = 999;
+            Console.WriteLine("Enter rows");
+            int rows = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter columns");
+            int columns = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < rows; i++)
             {
@@ -37,11 +36,10 @@ namespace Randomtext
                 for (int j = 0; j < columns; j++)
                 {
                     line += chars[r.Next(0, chars.Count)].ToString();
-                    //Console.WriteLine(chars[r.Next(0, chars.Count)].ToString() + " " + i + " " + line);
                 }
+                double percent = i + 1;
                 sw.WriteLine(line);
-                Console.WriteLine($"{i + 1}/{rows}");
-                //Console.WriteLine(line);
+                Console.WriteLine($"{i + 1}/{rows} - {Math.Round(percent / rows * 100, 2)}%");
             }
 
             sw.Close();
