@@ -13,7 +13,7 @@ namespace Randomtext
 
         static void Main(string[] args)
         {
-            string file = "C://Users/Luke/RT.txt";
+            string file = $"C://Users/{Environment.UserName}/RT.txt";
             if (!File.Exists(file))
             {
                 File.Create(file).Dispose();
